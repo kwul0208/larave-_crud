@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CrudController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "nama" => "ahmad"
-    ]);
-});
-Route::get('/about', function () {
-    return view('about', [
-        "nama" => "ahmad"
-    ]);
-});
-Route::get('/crud', function () {
-    return view('crud', [
-        "nama" => "ahmad"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
+Route::resource('/crud', CrudController::class);
+// Route::get('/crud', function () {
+//     return view('crud');
+// });
