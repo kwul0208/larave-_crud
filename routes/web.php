@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\Cruds;
+use App\Http\Controllers\CrudsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [AboutController::class, 'index']);
-Route::resource('/crud', CrudController::class);
+Route::resource('/crud/posts', CrudController::class);
+// Route::get('/crud/posts/id', [CrudController::class, 'id']);
+// Route::resource('/crud/posts', CrudController::class);
 // Route::get('/crud', function () {
 //     return view('crud');
 // });

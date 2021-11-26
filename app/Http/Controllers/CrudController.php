@@ -27,7 +27,7 @@ class CrudController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -38,7 +38,14 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            "nama" => "required",
+            "nim" => "required|Numeric",
+            "alamat" => "required"
+        ]);
+
+        Data::create($validateData);
+        return  redirect('/crud/posts')->with('message', 'Data baru berhasil ditambahkan');
     }
 
     /**
@@ -49,7 +56,9 @@ class CrudController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('detail', [
+            "data" => Data::find($id)
+        ]);
     }
 
     /**
@@ -60,7 +69,9 @@ class CrudController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('edit', [
+            "data" => Data::find($id)
+        ]);
     }
 
     /**
@@ -72,7 +83,15 @@ class CrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'nama' => 'required',
+            'nim' => 'required|Numeric',
+            'alamat' => 'required'
+        ]);
+
+        Data::where('id', $id)->update($validateData);
+
+        return redirect('/crud/posts')->with('message', 'Data Berhasil Diubah');
     }
 
     /**
@@ -83,6 +102,8 @@ class CrudController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Data::destroy($id);
+
+        return  redirect('/crud/posts')->with('message', 'Data berhasil dihapus');
     }
 }
